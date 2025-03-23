@@ -376,7 +376,7 @@ body.modal-open .scroll-button {
   color: #1a1a1a;
 }
 
-/* Стили бургер-меню */
+/* === Стили бургер-меню (всегда скрыто, показывается только на мобилке) === */
 .burger {
   display: none;
   font-size: 28px;
@@ -388,9 +388,12 @@ body.modal-open .scroll-button {
   z-index: 10001;
 }
 
-/* Скрытие меню на мобилках */
+
+/* === Мобильная адаптация === */
 @media (max-width: 768px) {
-	body {
+  
+  /* Размеры шрифта на мобилках */
+  body {
     font-size: 15px;
   }
 
@@ -401,12 +404,18 @@ body.modal-open .scroll-button {
   h3 {
     font-size: 1.2rem;
   }
- nav ul {
-	 img[alt="Фото Юлии"] {
+
+  /* Уменьшение фото + обтекание */
+  img[alt="Фото Юлии"] {
     width: 100%;
-    max-width: 160px; /* можно уменьшить до 140–160px */
+    max-width: 160px;
     float: left;
     margin: 0 15px 15px 0;
+    border-radius: 12px;
+  }
+
+  /* Скрытое мобильное меню (по умолчанию) */
+  nav ul {
     display: none;
     flex-direction: column;
     background: #1c1c1c;
@@ -414,18 +423,19 @@ body.modal-open .scroll-button {
     top: 60px;
     right: 0;
     width: 100%;
-    padding: 20px;
-	flex-direction: column;
     gap: 1rem;
     padding: 1rem;
-    max-height: 90vh; /* ограничиваем по высоте */
-    overflow-y: auto; /* включаем прокрутку */
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 9999;
   }
 
+  /* Показ меню при активации через JS */
   nav ul.active {
     display: flex;
   }
 
+  /* Показываем иконку-бургер */
   .burger {
     display: block;
   }
