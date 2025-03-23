@@ -349,6 +349,10 @@
       adminPanel.style.display = "block";
     }
   });
+	
+	// Если находимся на ?Julia.Jour — прокручиваем к форме входа
+if (window.location.search.includes("?Julia.Jour")) {
+  document.getElementById("loginForm").scrollIntoView({ behavior: 'smooth' });
 </script>
 
 
@@ -517,10 +521,6 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
       alert("Ошибка отправки. Попробуйте позже.");
     }
   });
-
-	// Если находимся на ?Julia.Jour — прокручиваем к форме входа
-if (window.location.search.includes("?Julia.Jour")) {
-  document.getElementById("loginForm").scrollIntoView({ behavior: 'smooth' });
 </script>
 
 </body>
