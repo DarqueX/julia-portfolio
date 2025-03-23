@@ -10,6 +10,12 @@
 <title>Юлия Василевская — Журналист &amp; Копирайтер</title>
 <link href="styles.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+
 </head>
 <body>
 <div class="background-elements"></div>
@@ -33,7 +39,14 @@
 
 <h1 align="center">Юлия Василевская</h1>
 
-
+<!-- Форма входа (отображается только если ?Julia.Jour) -->
+<div id="loginForm" style="display:none;" data-aos="fade-up">
+  <h3>Вход в админ-панель</h3>
+  <input type="email" id="loginEmail" placeholder="Email" required><br>
+  <input type="password" id="loginPassword" placeholder="Пароль" required><br>
+  <button onclick="login()">Войти</button>
+</div>
+	
 <section id="about" data-aos="zoom-in">
 <h2>Обо мне</h2>
 <img alt="Фото Юлии" src="photo.jpg" style="float: left; margin: 0 20px 20px 0; width: 250px; border-radius: 12px;"/><p>Я — журналист, копирайтер и редактор с более чем шестилетним опытом работы в сфере текстов и медиа. Моё профессиональное портфолио охватывает широкий спектр форматов: от репортажей и интервью до SEO-оптимизированных статей, брендированного контента и экспертных колонок.
@@ -255,28 +268,7 @@
 <!-- Кнопка наверх -->
 <button onclick="scrollToTop()" id="scrollTopBtn" title="Наверх">↑</button>
 
-
-<!-- Форма входа (отображается только если ?Julia.Jour) -->
-<div id="loginForm" style="display:none;" data-aos="fade-up">
-  <h3>Вход в админ-панель</h3>
-  <input type="email" id="loginEmail" placeholder="Email" required><br>
-  <input type="password" id="loginPassword" placeholder="Пароль" required><br>
-  <button onclick="login()">Войти</button>
-</div>
-
-	
-
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
-
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
-
-
-
-	
 	
 <script>
 
@@ -448,12 +440,20 @@ if (window.location.search.includes("?Julia.Jour")) {
   document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("loginForm").scrollIntoView({ behavior: 'smooth' });
   });
+	
+</script>
 
 
 
 
-// Код инициализации FireBase
-	const firebaseConfig = {
+	
+	<!-- Firebase SDKs -->
+
+
+
+
+<script>
+  const firebaseConfig = {
     apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
     authDomain: "julia-profile-site.firebaseapp.com",
     projectId: "julia-profile-site",
@@ -522,7 +522,6 @@ if (window.location.search.includes("?Julia.Jour")) {
       adminPanel.style.display = "block";
     }
   });
-	
 </script>
 
 </body>
