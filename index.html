@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<!-- AOS CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Юлия Василевская — Журналист &amp; Копирайтер</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div class="background-elements"></div>
+<header>
+<!-- Бургер-меню -->
+<div class="burger" onclick="toggleMenu()">☰</div>
+<nav id="mainNav">
+  <ul>
+    <li><a href="#about">Обо мне</a></li>
+    <li><a href="#portfolio">Портфолио</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#contacts">Контакты</a></li>
+    <li><a href="#column">Колонка</a></li>
+  </ul>
+</nav>
+
+</header>
+<main>
+
+
+
+<h1 align="center">Юлия Василевская</h1>
+
+
+<section id="about" data-aos="zoom-in">
+<h2>Обо мне</h2>
+<img alt="Фото Юлии" src="photo.jpg" style="float: left; margin: 0 20px 20px 0; width: 250px; border-radius: 12px;"/><p>Я — журналист, копирайтер и редактор с более чем шестилетним опытом работы в сфере текстов и медиа. Моё профессиональное портфолио охватывает широкий спектр форматов: от репортажей и интервью до SEO-оптимизированных статей, брендированного контента и экспертных колонок.
+
+<br></br>Работала с ведущими изданиями и бизнесами, где брала интервью у предпринимателей, создавала материалы об искусстве, культуре и городской жизни, а также освещала события в формате лонгридов и новостных заметок. Мне доверяют сложные темы — я умею найти тонкий баланс между информативностью, стилем и голосом бренда.
+
+Я специализируюсь на текстах, которые работают: увеличивают охваты, привлекают внимание, формируют имидж и конвертируют читателя в клиента. В текстах для бизнеса акцент делаю на чёткой структуре, ясности и выгоде для аудитории. В личных и редакторских проектах — на глубине, выразительности и нюансах.
+
+<br></br>Сотрудничаю как с редакциями, так и с частными заказчиками. Быстро вникаю в задачу, предлагаю решения и всегда соблюдаю дедлайны. В своей работе ценю честность, системность и чистоту текста.</p>
+</div>
+</div>
+</section>
+
+
+
+
+
+
+<section id="portfolio" data-aos="zoom-in">
+  <h2>Портфолио</h2>
+ <h3 class="portfolio-category-title">Журналистика</h3>
+  <div class="portfolio-wrapper">
+    <button class="scroll-button left" onclick="scrollPortfolio('колонка', -1)">&#10094;</button>
+    <div class="portfolio-scroll-container" id="portfolio-scroll-колонка">
+      <div class="portfolio-card" onclick="openModal('preview-колонка-1')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-колонка-2')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-колонка-3')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-колонка-4')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-колонка-5')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+    </div>
+    <button class="scroll-button right" onclick="scrollPortfolio('колонка', 1)">&#10095;</button>
+  </div>
+  
+  <h3 class="portfolio-category-title">Социальные сети</h3>
+  <div class="portfolio-wrapper">
+    <button class="scroll-button left" onclick="scrollPortfolio('посты-для-соцсетей', -1)">&#10094;</button>
+    <div class="portfolio-scroll-container" id="portfolio-scroll-посты-для-соцсетей">
+      <div class="portfolio-card" onclick="openModal('preview-посты-для-соцсетей-1')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-посты-для-соцсетей-2')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-посты-для-соцсетей-3')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-посты-для-соцсетей-4')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-посты-для-соцсетей-5')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+    </div>
+    <button class="scroll-button right" onclick="scrollPortfolio('посты-для-соцсетей', 1)">&#10095;</button>
+  </div>
+
+  <h3 class="portfolio-category-title">Копирайтинг и Брендинг</h3>
+  <div class="portfolio-wrapper">
+    <button class="scroll-button left" onclick="scrollPortfolio('seo-статьи', -1)">&#10094;</button>
+    <div class="portfolio-scroll-container" id="portfolio-scroll-seo-статьи">
+      <!-- Пример карточки -->
+		<div class="portfolio-card" onclick="openPdfModal('Платформа бренда: компоненты', 'SEO-text.pdf')">
+			<h3>SEO-статья</h3>
+			<p>Платформа бренда: компоненты</p>
+		</div>
+
+      <div class="portfolio-card" onclick="openModal('preview-seo-статьи-2')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-seo-статьи-3')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-seo-статьи-4')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+      <div class="portfolio-card" onclick="openModal('preview-seo-статьи-5')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+	   <div class="portfolio-card" onclick="openModal('preview-seo-статьи-6')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+	   <div class="portfolio-card" onclick="openModal('preview-seo-статьи-7')">
+        <h3>Название работы</h3>
+        <p>Описание или тип текста</p>
+      </div>
+    </div>
+    <button class="scroll-button right" onclick="scrollPortfolio('seo-статьи', 1)">&#10095;</button>
+  </div>
+
+
+
+
+
+  <!-- Модальные окна -->
+<!-- Универсальное модальное окно -->
+<div id="pdfModal" class="modal" onclick="closeModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close" onclick="closeModal()">×</span>
+    <h3 class="modal-title">Название статьи</h3>
+    <iframe src="..." frameborder="0"></iframe>
+    <a href="..." class="download-btn" download>Скачать PDF</a>
+  </div>
+</div>
+
+
+  <div id="preview-1" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('preview-1')">&#10006;</span>
+      <p>Здесь будет текст или файл №1</p>
+    </div>
+  </div>
+
+  <div id="preview-2" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('preview-2')">&#10006;</span>
+      <p>Здесь будет текст или файл №2</p>
+    </div>
+  </div>
+
+  <div id="preview-3" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('preview-3')">&#10006;</span>
+      <p>Здесь будет текст или файл №3</p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<section id="services" data-aos="zoom-in">
+<h2>Услуги</h2>
+<div class="services-text">
+  <p><strong>Стоимость услуг райтеров:</strong> соцсети, новости, лонгриды, интервью, речи, телеграммы</p>
+
+  <p><strong>Посты для соцсетей:</strong></p>
+  <ul>
+    <li>информационный пост объемом порядка 800 знаков — 300 рублей;</li>
+    <li>аналитический пост, пост с привлечением экспертов или вынужденно длинный пост — 400 рублей;</li>
+    <li>пост-бантик — 200 рублей + надбавка за охваты.</li>
+  </ul>
+
+  <p><strong>Работа над сторис</strong> оплачивается по фиксированному тарифу, исходя из необходимого числа в месяц. Фото или фото+текст — 200 рублей в день. Истории с применением графического дизайна/монтажа — по договоренности.</p>
+
+  <p><strong>Лонгриды:</strong></p>
+  <p>Оплата за знаки. Рыночная стоимость — 300-400 рублей за 1000 знаков. Важно: по такой схеме работают редко, т.к. она не учитывает сложность текста. Применима для случаев, когда ТЗ и специфика работы практически неизменны от текста к тексту.</p>
+
+  <p><strong>Оплата за сложность.</strong> Для текстов разного уровня сложности устанавливается конкретная фиксированная цена:</p>
+  <ul>
+    <li><strong>легкий текст.</strong> Объем не превышает 5 тысяч знаков, райтеру предоставляются четкое ТЗ с примерами аналогичных публикаций у конкурентов и ключами, план будущей публикации и необходимые гиперссылки. Стоимость — 2-3 тысячи рублей (в зависимости от результата, количества правок);</li>
+    <li><strong>текст средней сложности.</strong> Объем варьируется от 5 до 10 тысяч знаков, райтеру предоставляются ТЗ с ключами, план будущей публикации, по возможности — гиперссылки. Возможна самостоятельная работа автора с экспертами, поиск дополнительной информации. Стоимость — 4-6 тысяч рублей (в зависимости от результата, длины текста, количества правок);</li>
+    <li><strong>сложный текст.</strong> Объем от 10 тысяч знаков. ТЗ нечеткое или отсутствует в принципе, райтер самостоятельно работает с источниками и составляет план, при необходимости берет комментарии у экспертов. Стоимость — 7-8 тысяч рублей (для текстов свыше 20 тысяч знаков или узкопрофильных материалов возможна доплата — по договоренности).</li>
+  </ul>
+
+  <p><strong>Новостные тексты и пресс-релизы:</strong></p>
+  <ul>
+    <li>классический новостной текст или пресс-релиз (до 2 тысяч знаков, есть исходные материалы, примеры конкурентов, дополнительные комментарии не требуются) — 300 рублей;</li>
+    <li>новостной текст с привлечением экспертов, поиском дополнительной информации или пресс-релиз по узкопрофильной теме — 500 рублей (до 2,5 тысячи знаков).</li>
+  </ul>
+</div>
+</section>
+
+
+
+
+
+
+
+<section id="contacts" data-aos="zoom-in">
+<h2>Контакты</h2>
+<p>mail: yuliaivan.jour@gmail.com</p>
+<form>
+<input placeholder="Ваше имя" required="" type="text"/>
+<input placeholder="Email" required="" type="email"/>
+<textarea placeholder="Сообщение" required=""></textarea>
+<button type="submit">Отправить</button>
+</form>
+</section>
+
+
+
+
+
+
+
+<section id="column" data-aos="zoom-in">
+<h2>Актуальное</h2>
+<p>Здесь будут публиковаться размышления, наблюдения и тексты вне формата.</p>
+</section>
+
+
+
+
+
+</main>
+<footer>
+<p>© 2025 Юлия Василевская</p>
+</footer>
+
+
+<!-- Кнопка наверх -->
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Наверх">↑</button>
+
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+
+  // Инициализация анимации AOS (Animate On Scroll)
+  AOS.init({
+    duration: 1300,             // Длительность анимации (в миллисекундах)
+    easing: 'ease-out-cubic',   // Плавность анимации
+    once: false,                // Анимация проигрывается при каждом появлении
+    mirror: true,               // Анимация срабатывает при обратной прокрутке
+    offset: 120,                // Смещение перед началом анимации (в пикселях)
+    delay: 160                  // Задержка перед началом анимации
+  });
+
+// Открытие модального окна с PDF
+function openPdfModal(title, filename) {
+  const modal = document.getElementById('pdfModal');
+  const iframe = modal.querySelector('iframe');
+  const header = modal.querySelector('.modal-title');
+  const downloadBtn = modal.querySelector('.download-btn');
+  // Задаём заголовок и путь к файлу
+  header.textContent = title;
+  iframe.src = `files/${filename}#toolbar=0&navpanes=0&scrollbar=0`;
+  downloadBtn.href = `files/${filename}`;
+  // Показываем модалку
+  modal.style.display = 'block';
+  // Скрываем кнопку "наверх"
+  document.getElementById("scrollTopBtn").style.display = "none";
+  // Убираем прокрутку фона
+  document.body.classList.add('modal-open');
+}
+
+
+// Закрытие модального окна
+function closeModal() {
+  const modal = document.getElementById('pdfModal');
+  modal.style.display = 'none';
+  // Возвращаем кнопку "наверх"
+  document.getElementById("scrollTopBtn").style.display = "block";
+  // Возвращаем прокрутку страницы
+  document.body.classList.remove('modal-open');
+}
+// Закрытие модального окна при клике вне его содержимого
+document.addEventListener('click', function(event) {
+  const modal = document.getElementById('pdfModal');
+  // Проверка: модалка открыта и клик был по самой модалке (а не по внутреннему .modal-content)
+  if (modal && modal.style.display === 'block' && event.target === modal) {
+    closeModal(); // Закрываем окно
+  }
+});
+
+
+  // Прокрутка портфолио по горизонтали в нужной категории
+  function scrollPortfolio(category, direction) {
+    const container = document.getElementById(`portfolio-scroll-${category}`);
+    const scrollAmount = 320; // Ширина одного "шага" прокрутки (можно адаптировать)
+    container.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+
+  // Отображает кнопку "Наверх", если пользователь прокрутил более 400px вниз
+  window.onscroll = function () {
+    const scrollBtn = document.getElementById("scrollTopBtn");
+    if (window.scrollY > 400) {
+      scrollBtn.style.display = "block";
+    } else {
+      scrollBtn.style.display = "none";
+    }
+  };
+
+  // Плавная прокрутка страницы вверх при нажатии на кнопку "Наверх"
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+  
+  
+  //Бургер-меню
+  function toggleMenu() {
+    const nav = document.querySelector("nav ul");
+    nav.classList.toggle("active");
+  }
+  
+   // Свайп для карусели
+  document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
+    let startX = 0;
+
+    container.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+    });
+
+    container.addEventListener('touchmove', e => {
+      if (!startX) return;
+      const diff = startX - e.touches[0].clientX;
+      container.scrollLeft += diff;
+      startX = e.touches[0].clientX;
+    });
+
+    container.addEventListener('touchend', () => {
+      startX = 0;
+    });
+  });
+
+// Добавим свайп на мобильных для всех контейнеров с работами
+document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
+  let startX = 0;
+  let scrollLeft = 0;
+  let isDown = false;
+
+  // Начало касания
+  container.addEventListener('touchstart', (e) => {
+    isDown = true;
+    startX = e.touches[0].pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+  });
+
+  // Движение пальцем
+  container.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.touches[0].pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.2; // коэффициент скорости
+    container.scrollLeft = scrollLeft - walk;
+  });
+
+  // Завершение свайпа
+  container.addEventListener('touchend', () => {
+    isDown = false;
+  });
+});
+</script>
+
+
+
+
+</body>
+</html>
