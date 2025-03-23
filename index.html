@@ -33,7 +33,14 @@
 
 <h1 align="center">Юлия Василевская</h1>
 
-
+<!-- Форма входа (отображается только если ?Julia.Jour) -->
+<div id="loginForm" style="display:none;" data-aos="fade-up">
+  <h3>Вход в админ-панель</h3>
+  <input type="email" id="loginEmail" placeholder="Email" required><br>
+  <input type="password" id="loginPassword" placeholder="Пароль" required><br>
+  <button onclick="login()">Войти</button>
+</div>
+	
 <section id="about" data-aos="zoom-in">
 <h2>Обо мне</h2>
 <img alt="Фото Юлии" src="photo.jpg" style="float: left; margin: 0 20px 20px 0; width: 250px; border-radius: 12px;"/><p>Я — журналист, копирайтер и редактор с более чем шестилетним опытом работы в сфере текстов и медиа. Моё профессиональное портфолио охватывает широкий спектр форматов: от репортажей и интервью до SEO-оптимизированных статей, брендированного контента и экспертных колонок.
@@ -232,11 +239,15 @@
   <h2>Актуальное</h2>
   <div id="latestPosts"></div>
 
-  <!-- Админская форма (по умолчанию скрыта) -->
-  <div id="adminForm" style="display: none; margin-top: 1rem;">
-    <textarea id="newPostText" placeholder="Новая заметка..." rows="4" style="width: 100%;"></textarea>
-    <button onclick="addPost()">Добавить</button>
-  </div>
+<!-- Админ-интерфейс (только для администратора) -->
+<div id="adminPanel" style="display:none;" data-aos="fade-up">
+  <h3>Добавить публикацию</h3>
+  <input type="text" id="postTitle" placeholder="Заголовок" required><br>
+  <textarea id="postText" placeholder="Текст публикации" required></textarea><br>
+  <button onclick="addPost()">Опубликовать</button>
+</div>
+	
+	
 </section>
 
 
@@ -251,16 +262,97 @@
 <!-- Кнопка наверх -->
 <button onclick="scrollToTop()" id="scrollTopBtn" title="Наверх">↑</button>
 
-	<!-- Вставить где-то внизу сайта -->
-<button onclick="adminLogin()" style="margin-top: 2rem;">Вход для администратора</button>
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+	
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
+    authDomain: "julia-profile-site.firebaseapp.com",
+    projectId: "julia-profile-site",
+    storageBucket: "julia-profile-site.firebasestorage.app",
+    messagingSenderId: "539619849387",
+    appId: "1:539619849387:web:4af99cad0ff10b0ba233ee"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  const postsContainer = document.getElementById('latestPosts');
+  const adminPanel = document.getElementById('adminPanel');
+  const loginForm = document.getElementById('loginForm');
+
+  // 1. Показываем форму входа если в URL есть ?Julia.Jour
+  if (window.location.search.includes("?Julia.Jour")) {
+    loginForm.style.display = "block";
+  }
+
+  // 2. Авторизация
+  function login() {
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        loginForm.style.display = "none";
+        adminPanel.style.display = "block";
+      })
+      .catch((error) => {
+        alert("Ошибка входа: " + error.message);
+      });
+  }
+  window.login = login;
+
+  // 3. Добавление поста
+  async function addPost() {
+    const title = document.getElementById("postTitle").value.trim();
+    const text = document.getElementById("postText").value.trim();
+    if (title && text) {
+      await addDoc(collection(db, "posts"), {
+        title: title,
+        text: text,
+        timestamp: serverTimestamp()
+      });
+      document.getElementById("postTitle").value = "";
+      document.getElementById("postText").value = "";
+    }
+  }
+  window.addPost = addPost;
+
+  // 4. Загрузка публикаций (всегда отображается блок "Актуальное")
+  const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+  onSnapshot(q, (snapshot) => {
+    postsContainer.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const post = doc.data();
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = `
+        <p><strong>${post.title || "Без названия"}</strong></p>
+        <p>${post.text}</p>
+        <hr>
+      `;
+      postsContainer.appendChild(wrapper);
+    });
+  });
+
+  // 5. Скрыть админку если пользователь не залогинен
+  onAuthStateChanged(auth, (user) => {
+    if (user && window.location.search.includes("?Julia.Jour")) {
+      adminPanel.style.display = "block";
+    }
+  });
+</script>
+
+
+	
 <script>
 
   // Инициализация анимации AOS (Animate On Scroll)
@@ -425,61 +517,7 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
       alert("Ошибка отправки. Попробуйте позже.");
     }
   });
-	// Инициализация Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
-    authDomain: "julia-profile-site.firebaseapp.com",
-    projectId: "julia-profile-site",
-    storageBucket: "julia-profile-site.firebasestorage.app",
-    messagingSenderId: "539619849387",
-    appId: "1:539619849387:web:4af99cad0ff10b0ba233ee"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore(); // база данных
-  const auth = firebase.auth();    // авторизация
-	
-	// Скрипт работы с Firebase
-const postsContainer = document.getElementById('latestPosts');
-  const adminForm = document.getElementById('adminForm');
-
-  // Загрузка актуальных постов
-  firebase.firestore().collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
-    postsContainer.innerHTML = ""; // очищаем
-    snapshot.forEach((doc) => {
-      const post = document.createElement("p");
-      post.textContent = doc.data().text;
-      postsContainer.appendChild(post);
-    });
-  });
-
-  // Добавление поста (если админ)
-  function addPost() {
-    const text = document.getElementById("newPostText").value.trim();
-    if (text) {
-      firebase.firestore().collection("posts").add({
-        text: text,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(() => {
-        document.getElementById("newPostText").value = "";
-      });
-    }
-  }
-	
-// Авторизация администратора
-	  function adminLogin() {
-    const password = prompt("Введите пароль:");
-    if (password === "julia2025") { // 🔒 Задай свой
-      adminForm.style.display = "block";
-      alert("Добро пожаловать, админ!");
-    } else {
-      alert("Неверный пароль");
-    }
-  }
 </script>
-
-
-
 
 </body>
 </html>
