@@ -388,7 +388,7 @@ body.modal-open .scroll-button {
   z-index: 10001;
 }
 
-/* По умолчанию показываем iframe, скрываем мобильную ссылку */
+/* По умолчанию: показываем iframe, скрываем кнопку для мобильных */
 .pdf-desktop {
   display: block;
 }
@@ -398,14 +398,7 @@ body.modal-open .scroll-button {
 
 /* === Мобильная адаптация === */
 @media (max-width: 768px) {
-  .pdf-desktop {
-    display: none;
-  }
-  .pdf-mobile {
-    display: block;
-    margin-bottom: 1rem;
-  }
-  /* Размеры шрифта на мобилках */
+  /* Размеры текста */
   body {
     font-size: 15px;
   }
@@ -418,7 +411,7 @@ body.modal-open .scroll-button {
     font-size: 1.2rem;
   }
 
-  /* Уменьшение фото + обтекание */
+  /* Уменьшенное фото и обтекание */
   img[alt="Фото Юлии"] {
     width: 100%;
     max-width: 160px;
@@ -427,49 +420,62 @@ body.modal-open .scroll-button {
     border-radius: 12px;
   }
 
-  /* Скрытое мобильное меню (по умолчанию) */
+  /* Мобильное меню */
   nav ul {
-position: absolute;
-  top: 60px;
-  right: 0;
-  left: 0; /* 🟢 Добавляем чтобы растянуть на всю ширину */
-  width: 100%;
-  background: #1c1c1c;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  max-height: 90vh;
-  overflow-y: auto;
-  display: none;
-  z-index: 10000;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    background: #1c1c1c;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: none;
+    z-index: 10000;
   }
 
-  /* Показ меню при активации через JS */
   nav ul.active {
     display: flex;
   }
 
-  /* Показываем иконку-бургер */
   .burger {
     display: block;
   }
 
-     /* === Адаптация модального окна для мобильных устройств === */
+  /* Показываем только кнопку, скрываем iframe */
+  .pdf-desktop {
+    display: none;
+  }
+
+  .pdf-mobile {
+    display: block;
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  .pdf-mobile a {
+    display: inline-block;
+    padding: 0.75rem 1rem;
+    background-color: black;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  /* Улучшение модального окна */
   .modal-content {
-    width: 95%;            /* Оставляем небольшие отступы по краям экрана */
-    height: 90vh;          /* Ограничиваем высоту окна 90% от высоты экрана */
-    padding: 1rem;         /* Внутренние отступы */
-    border-radius: 10px;   /* Закругление углов */
-    overflow: hidden;      /* Скрываем лишние скроллы */
-    display: flex;         /* Гибкий контейнер */
-    flex-direction: column;/* Элементы внутри идут вертикально */
+    width: 95%;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
   .modal-content iframe {
-    flex-grow: 1;          /* Заставляем iframe занимать всё доступное пространство */
-    width: 100%;           /* Растягиваем по ширине модального окна */
-    height: 100%;          /* На всю доступную высоту внутри .modal-content */
-    border: none;          /* Убираем рамку у iframe */
+    display: none; /* iframe полностью скрыт на мобилках */
   }
 }
 
