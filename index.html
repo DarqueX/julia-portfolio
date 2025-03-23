@@ -158,32 +158,20 @@
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="close" onclick="closeModal()">×</span>
     <h3 class="modal-title">Название статьи</h3>
-    <iframe src="..." frameborder="0"></iframe>
-    <a href="..." class="download-btn" download>Скачать PDF</a>
+
+    <!-- Контейнер для десктопа -->
+    <div class="pdf-desktop">
+      <iframe src="files/SEO-text.pdf#toolbar=0&navpanes=0&scrollbar=0" frameborder="0"></iframe>
+    </div>
+
+    <!-- Кнопка для мобильных -->
+    <div class="pdf-mobile">
+      <a href="files/SEO-text.pdf" target="_blank" class="download-btn">Открыть PDF в новой вкладке</a>
+    </div>
+
+    <a href="files/SEO-text.pdf" class="download-btn" download>Скачать PDF</a>
   </div>
 </div>
-
-
-  <div id="preview-1" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('preview-1')">&#10006;</span>
-      <p>Здесь будет текст или файл №1</p>
-    </div>
-  </div>
-
-  <div id="preview-2" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('preview-2')">&#10006;</span>
-      <p>Здесь будет текст или файл №2</p>
-    </div>
-  </div>
-
-  <div id="preview-3" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('preview-3')">&#10006;</span>
-      <p>Здесь будет текст или файл №3</p>
-    </div>
-  </div>
 </section>
 
 
