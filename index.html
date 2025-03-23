@@ -156,21 +156,21 @@
 <!-- Универсальное модальное окно -->
 <div id="pdfModal" class="modal" onclick="closeModal()">
   <div class="modal-content" onclick="event.stopPropagation()">
-    <span class="close" onclick="closeModal()">×</span>
-    <h3 class="modal-title">Название статьи</h3>
+  <span class="close" onclick="closeModal()">×</span>
+  <h3 class="modal-title">Платформа бренда: компоненты</h3>
 
-    <!-- Контейнер для десктопа -->
-    <div class="pdf-desktop">
-      <iframe src="files/SEO-text.pdf#toolbar=0&navpanes=0&scrollbar=0" frameborder="0"></iframe>
-    </div>
-
-    <!-- Кнопка для мобильных -->
-    <div class="pdf-mobile">
-      <a href="files/SEO-text.pdf" target="_blank" class="download-btn">Открыть PDF в новой вкладке</a>
-    </div>
-
-    <a href="files/SEO-text.pdf" class="download-btn" download>Скачать PDF</a>
+  <!-- ПК: отображаем PDF внутри -->
+  <div class="pdf-desktop">
+    <iframe src="files/SEO-text.pdf#toolbar=0&navpanes=0&scrollbar=0"></iframe>
   </div>
+
+  <!-- Мобилки: кнопка для открытия в новой вкладке -->
+  <div class="pdf-mobile">
+    <a href="files/SEO-text.pdf" target="_blank">Открыть PDF в новой вкладке</a>
+  </div>
+
+  <a href="files/SEO-text.pdf" class="download-btn" download>Скачать PDF</a>
+</div>
 </div>
 </section>
 
