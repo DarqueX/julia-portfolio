@@ -227,10 +227,18 @@
 
 
 	
-<section id="column" data-aos="zoom-in">
-<h2>Актуальное</h2>
-<p>Здесь будут публиковаться размышления, наблюдения и тексты вне формата.</p>
+<!-- === Актуальное === -->
+<section id="latest" data-aos="fade-up">
+  <h2>Актуальное</h2>
+  <div id="latestPosts"></div>
+
+  <!-- Админская форма (по умолчанию скрыта) -->
+  <div id="adminForm" style="display: none; margin-top: 1rem;">
+    <textarea id="newPostText" placeholder="Новая заметка..." rows="4" style="width: 100%;"></textarea>
+    <button onclick="addPost()">Добавить</button>
+  </div>
 </section>
+
 
 
 
@@ -242,6 +250,10 @@
 
 <!-- Кнопка наверх -->
 <button onclick="scrollToTop()" id="scrollTopBtn" title="Наверх">↑</button>
+
+	<!-- Вставить где-то внизу сайта -->
+<button onclick="adminLogin()" style="margin-top: 2rem;">Вход для администратора</button>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -426,6 +438,44 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore(); // база данных
   const auth = firebase.auth();    // авторизация
+	
+	// Скрипт работы с Firebase
+const postsContainer = document.getElementById('latestPosts');
+  const adminForm = document.getElementById('adminForm');
+
+  // Загрузка актуальных постов
+  firebase.firestore().collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+    postsContainer.innerHTML = ""; // очищаем
+    snapshot.forEach((doc) => {
+      const post = document.createElement("p");
+      post.textContent = doc.data().text;
+      postsContainer.appendChild(post);
+    });
+  });
+
+  // Добавление поста (если админ)
+  function addPost() {
+    const text = document.getElementById("newPostText").value.trim();
+    if (text) {
+      firebase.firestore().collection("posts").add({
+        text: text,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        document.getElementById("newPostText").value = "";
+      });
+    }
+  }
+	
+// Авторизация администратора
+	  function adminLogin() {
+    const password = prompt("Введите пароль:");
+    if (password === "julia2025") { // 🔒 Задай свой
+      adminForm.style.display = "block";
+      alert("Добро пожаловать, админ!");
+    } else {
+      alert("Неверный пароль");
+    }
+  }
 </script>
 
 
