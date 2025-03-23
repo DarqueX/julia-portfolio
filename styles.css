@@ -478,24 +478,3 @@ body.modal-open .scroll-button {
     display: none; /* iframe полностью скрыт на мобилках */
   }
 }
-
- /* Стиль для формы входа
-#loginForm {
-  background-color: #f5f5f5;
-  padding: 2rem;
-  margin: 2rem auto;
-  max-width: 400px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  text-align: center;
-}
-#loginForm input, #loginForm button {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-}
-*/
-
-
-
-
