@@ -52,15 +52,6 @@
   <button onclick="addPost()">Опубликовать</button>
 </div>
 
-<!-- === Микроблог "Актуальное" === -->
-<section id="latest">
-  <h2>Актуальное</h2>
-  <div id="latestPosts" class="microblog-scroll"></div>
-</section>
-
-
-
-
 <h1 align="center">Юлия Василевская</h1>
 
 
@@ -257,10 +248,29 @@
 
 
 	
-<!-- === Актуальное === -->
-<section id="latest" data-aos="fade-up">
+<!-- === Микроблог "Актуальное" === -->
+<section id="latest">
   <h2>Актуальное</h2>
-  <div id="latestPosts"></div>
+  <div id="latestPosts" class="microblog-scroll"></div>
+</section>
+	
+	<!-- ===Форма авторизации в HTML === -->
+<div id="loginForm" style="display:none">
+  <h3>Вход в админ-панель</h3>
+  <input id="loginEmail" type="email" placeholder="Email" required>
+  <input id="loginPassword" type="password" placeholder="Пароль" required>
+  <button onclick="login()">Войти</button>
+</div>
+
+	<!-- ===панель администратора === -->
+<div id="adminPanel" style="display:none">
+  <h3>Добавить публикацию</h3>
+  <input id="postTitle" type="text" placeholder="Заголовок">
+  <textarea id="postText" placeholder="Текст публикации"></textarea>
+  <button onclick="addPost()">Опубликовать</button>
+</div>
+
+
 
   <!-- Админская форма (по умолчанию скрыта) -->
   <div id="adminForm" style="display: none; margin-top: 1rem;">
