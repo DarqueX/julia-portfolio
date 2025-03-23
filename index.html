@@ -453,7 +453,6 @@ if (window.location.search.includes("?Julia.Jour")) {
 
 
 <script>
-  // ✅ Инициализация Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
     authDomain: "julia-profile-site.firebaseapp.com",
@@ -471,13 +470,10 @@ if (window.location.search.includes("?Julia.Jour")) {
   const adminPanel = document.getElementById('adminPanel');
   const loginForm = document.getElementById('loginForm');
 
-  // ✅ Проверка URL: если есть ?Julia.Jour — показываем форму входа
   if (window.location.search.includes("?Julia.Jour")) {
     loginForm.style.display = "block";
-    loginForm.scrollIntoView({ behavior: 'smooth' });
   }
 
-  // ✅ Авторизация
   function login() {
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
@@ -492,40 +488,35 @@ if (window.location.search.includes("?Julia.Jour")) {
   }
   window.login = login;
 
-  // ✅ Добавление поста
-  function addPost() {
+  async function addPost() {
     const title = document.getElementById("postTitle").value.trim();
     const text = document.getElementById("postText").value.trim();
     if (title && text) {
-      db.collection("posts").add({
-        title: title,
-        text: text,
+      await db.collection("posts").add({
+        title,
+        text,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(() => {
-        document.getElementById("postTitle").value = "";
-        document.getElementById("postText").value = "";
       });
+      document.getElementById("postTitle").value = "";
+      document.getElementById("postText").value = "";
     }
   }
   window.addPost = addPost;
 
-  // ✅ Подгрузка постов (всегда показываем блок "Актуальное")
-  db.collection("posts").orderBy("timestamp", "desc")
-    .onSnapshot((snapshot) => {
-      postsContainer.innerHTML = "";
-      snapshot.forEach((doc) => {
-        const post = doc.data();
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = `
-          <p><strong>${post.title || "Без названия"}</strong></p>
-          <p>${post.text}</p>
-          <hr>
-        `;
-        postsContainer.appendChild(wrapper);
-      });
+  db.collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+    postsContainer.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const post = doc.data();
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = `
+        <p><strong>${post.title || "Без названия"}</strong></p>
+        <p>${post.text}</p>
+        <hr>
+      `;
+      postsContainer.appendChild(wrapper);
     });
+  });
 
-  // ✅ Показываем админ-панель при успешной авторизации
   auth.onAuthStateChanged((user) => {
     if (user && window.location.search.includes("?Julia.Jour")) {
       adminPanel.style.display = "block";
