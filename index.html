@@ -10,6 +10,13 @@
 <title>Юлия Василевская — Журналист &amp; Копирайтер</title>
 <link href="styles.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+
+<!-- === Firebase SDKs === -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+<!-- ✅ Добавлены Firebase SDKs: app, auth, firestore -->
+
 </head>
 <body>
 <div class="background-elements"></div>
@@ -28,6 +35,29 @@
 
 </header>
 <main>
+
+<!-- === Блок формы входа для администратора (виден только при ?Julia.Jour) === -->
+<div id="loginForm" style="display:none;">
+  <h3>Вход для администратора</h3>
+  <input type="email" id="loginEmail" placeholder="Email" required />
+  <input type="password" id="loginPassword" placeholder="Пароль" required />
+  <button onclick="login()">Войти</button>
+</div>
+
+<!-- === Админская панель (видна после входа) === -->
+<div id="adminPanel" style="display:none;">
+  <h3>Добавить публикацию</h3>
+  <input type="text" id="postTitle" placeholder="Заголовок" />
+  <textarea id="postText" placeholder="Текст"></textarea>
+  <button onclick="addPost()">Опубликовать</button>
+</div>
+
+<!-- === Микроблог "Актуальное" === -->
+<section id="latest">
+  <h2>Актуальное</h2>
+  <div id="latestPosts" class="microblog-scroll"></div>
+</section>
+
 
 
 
@@ -480,6 +510,76 @@ const postsContainer = document.getElementById('latestPosts');
 
 
 
+
+
+<!-- === Firebase логика для микроблога и входа === -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
+    authDomain: "julia-profile-site.firebaseapp.com",
+    projectId: "julia-profile-site",
+    storageBucket: "julia-profile-site.firebasestorage.app",
+    messagingSenderId: "539619849387",
+    appId: "1:539619849387:web:4af99cad0ff10b0ba233ee"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+
+  const postsContainer = document.getElementById('latestPosts');
+  const adminPanel = document.getElementById('adminPanel');
+  const loginForm = document.getElementById('loginForm');
+
+  if (window.location.search.includes("?Julia.Jour")) {
+    loginForm.style.display = "block";
+  }
+
+  function login() {
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+    auth.signInWithEmailAndPassword(email, password)
+      .then(() => {
+        loginForm.style.display = "none";
+        adminPanel.style.display = "block";
+      })
+      .catch((error) => alert("Ошибка входа: " + error.message));
+  }
+
+  async function addPost() {
+    const title = document.getElementById("postTitle").value.trim();
+    const text = document.getElementById("postText").value.trim();
+    if (title && text) {
+      await db.collection("posts").add({
+        title: title,
+        text: text,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      document.getElementById("postTitle").value = "";
+      document.getElementById("postText").value = "";
+    }
+  }
+
+  db.collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+    postsContainer.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const post = doc.data();
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = `
+        <p><strong>${post.title || "Без заголовка"}</strong></p>
+        <p>${post.text}</p>
+        <hr>
+      `;
+      postsContainer.appendChild(wrapper);
+    });
+  });
+
+  auth.onAuthStateChanged((user) => {
+    if (user && window.location.search.includes("?Julia.Jour")) {
+      adminPanel.style.display = "block";
+    }
+  });
+</script>
 
 </body>
 </html>
