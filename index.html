@@ -264,95 +264,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 	
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
-  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
-    authDomain: "julia-profile-site.firebaseapp.com",
-    projectId: "julia-profile-site",
-    storageBucket: "julia-profile-site.firebasestorage.app",
-    messagingSenderId: "539619849387",
-    appId: "1:539619849387:web:4af99cad0ff10b0ba233ee"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-
-  const postsContainer = document.getElementById('latestPosts');
-  const adminPanel = document.getElementById('adminPanel');
-  const loginForm = document.getElementById('loginForm');
-
-  // 1. Показываем форму входа если в URL есть ?Julia.Jour
-  if (window.location.search.includes("?Julia.Jour")) {
-    loginForm.style.display = "block";
-  }
-
-  // 2. Авторизация
-  function login() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        loginForm.style.display = "none";
-        adminPanel.style.display = "block";
-      })
-      .catch((error) => {
-        alert("Ошибка входа: " + error.message);
-      });
-  }
-  window.login = login;
-
-  // 3. Добавление поста
-  async function addPost() {
-    const title = document.getElementById("postTitle").value.trim();
-    const text = document.getElementById("postText").value.trim();
-    if (title && text) {
-      await addDoc(collection(db, "posts"), {
-        title: title,
-        text: text,
-        timestamp: serverTimestamp()
-      });
-      document.getElementById("postTitle").value = "";
-      document.getElementById("postText").value = "";
-    }
-  }
-  window.addPost = addPost;
-
-  // 4. Загрузка публикаций (всегда отображается блок "Актуальное")
-  const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
-  onSnapshot(q, (snapshot) => {
-    postsContainer.innerHTML = "";
-    snapshot.forEach((doc) => {
-      const post = doc.data();
-      const wrapper = document.createElement("div");
-      wrapper.innerHTML = `
-        <p><strong>${post.title || "Без названия"}</strong></p>
-        <p>${post.text}</p>
-        <hr>
-      `;
-      postsContainer.appendChild(wrapper);
-    });
-  });
-
-  // 5. Скрыть админку если пользователь не залогинен
-  onAuthStateChanged(auth, (user) => {
-    if (user && window.location.search.includes("?Julia.Jour")) {
-      adminPanel.style.display = "block";
-    }
-  });
-</script>
-
-
-	
 <script>
 
   // Инициализация анимации AOS (Animate On Scroll)
@@ -520,9 +431,99 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
 
 	// Если находимся на ?Julia.Jour — прокручиваем к форме входа
 if (window.location.search.includes("?Julia.Jour")) {
-  document.getElementById("loginForm").scrollIntoView({ behavior: 'smooth' });
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("loginForm").scrollIntoView({ behavior: 'smooth' });
+  });
 	
 </script>
+
+
+
+
+	
+	<!-- Firebase SDKs -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
+    authDomain: "julia-profile-site.firebaseapp.com",
+    projectId: "julia-profile-site",
+    storageBucket: "julia-profile-site.firebasestorage.app",
+    messagingSenderId: "539619849387",
+    appId: "1:539619849387:web:4af99cad0ff10b0ba233ee"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  const postsContainer = document.getElementById('latestPosts');
+  const adminPanel = document.getElementById('adminPanel');
+  const loginForm = document.getElementById('loginForm');
+
+  // 1. Показываем форму входа если в URL есть ?Julia.Jour
+  if (window.location.search.includes("?Julia.Jour")) {
+    loginForm.style.display = "block";
+  }
+
+  // 2. Авторизация
+  function login() {
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        loginForm.style.display = "none";
+        adminPanel.style.display = "block";
+      })
+      .catch((error) => {
+        alert("Ошибка входа: " + error.message);
+      });
+  }
+  window.login = login;
+
+  // 3. Добавление поста
+  async function addPost() {
+    const title = document.getElementById("postTitle").value.trim();
+    const text = document.getElementById("postText").value.trim();
+    if (title && text) {
+      await addDoc(collection(db, "posts"), {
+        title: title,
+        text: text,
+        timestamp: serverTimestamp()
+      });
+      document.getElementById("postTitle").value = "";
+      document.getElementById("postText").value = "";
+    }
+  }
+  window.addPost = addPost;
+
+  // 4. Загрузка публикаций (всегда отображается блок "Актуальное")
+  const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+  onSnapshot(q, (snapshot) => {
+    postsContainer.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const post = doc.data();
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = `
+        <p><strong>${post.title || "Без названия"}</strong></p>
+        <p>${post.text}</p>
+        <hr>
+      `;
+      postsContainer.appendChild(wrapper);
+    });
+  });
+
+  // 5. Скрыть админку если пользователь не залогинен
+  onAuthStateChanged(auth, (user) => {
+    if (user && window.location.search.includes("?Julia.Jour")) {
+      adminPanel.style.display = "block";
+    }
+  });
+</script>
+
 
 </body>
 </html>
