@@ -416,18 +416,19 @@ body.modal-open .scroll-button {
 
   /* Скрытое мобильное меню (по умолчанию) */
   nav ul {
-    display: none;
-    flex-direction: column;
-    background: #1c1c1c;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 100%;
-    gap: 1rem;
-    padding: 1rem;
-    max-height: 90vh;
-    overflow-y: auto;
-    z-index: 9999;
+position: absolute;
+  top: 60px;
+  right: 0;
+  left: 0; /* 🟢 Добавляем чтобы растянуть на всю ширину */
+  width: 100%;
+  background: #1c1c1c;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: none;
+  z-index: 10000;
   }
 
   /* Показ меню при активации через JS */
