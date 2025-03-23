@@ -298,6 +298,7 @@ footer {
   width: 100%;
   height: 100%;
   border: none;
+  allign: center;
 }
 
 /* Крестик закрытия модального окна */
