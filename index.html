@@ -233,22 +233,6 @@
   <h2>Актуальное</h2>
   <div id="latestPosts" class="microblog-scroll"></div>
 </section>
-	
- <!-- Форма входа -->
-      <div id="loginForm" style="display:none">
-        <h3>Вход в админ-панель</h3>
-        <input id="loginEmail" type="email" placeholder="Email" required>
-        <input id="loginPassword" type="password" placeholder="Пароль" required>
-        <button onclick="login()">Войти</button>
-      </div>
-
-    <!-- Админская панель -->
-      <div id="adminPanel" style="display:none">
-        <h3>Добавить публикацию</h3>
-        <input id="postTitle" type="text" placeholder="Заголовок">
-        <textarea id="postText" placeholder="Текст публикации"></textarea>
-        <button onclick="addPost()">Опубликовать</button>
-      </div>
     </section>
 
 
@@ -262,10 +246,6 @@
 
 <!-- Кнопка наверх -->
 <button onclick="scrollToTop()" id="scrollTopBtn" title="Наверх">↑</button>
-
-	<!-- Вставить где-то внизу сайта -->
-<button onclick="adminLogin()" style="margin-top: 2rem;">Вход для администратора</button>
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -437,61 +417,9 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
       alert("Ошибка отправки. Попробуйте позже.");
     }
   });
-</script>
-	
-<script>
-  // Firebase конфиг
-  const firebaseConfig = {
-    apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
-    authDomain: "julia-profile-site.firebaseapp.com",
-    projectId: "julia-profile-site",
-    storageBucket: "julia-profile-site.firebasestorage.app",
-    messagingSenderId: "539619849387",
-    appId: "1:539619849387:web:4af99cad0ff10b0ba233ee"
-  };
+	// отображение постов
+	const postsContainer = document.getElementById('latestPosts');
 
-  // Инициализация Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  const auth = firebase.auth();
-
-  const postsContainer = document.getElementById('latestPosts');
-  const loginForm = document.getElementById('loginForm');
-  const adminPanel = document.getElementById('adminPanel');
-
-  // Показываем форму входа, если параметр ?Julia.Jour в URL
-  if (window.location.search.includes("?Julia.Jour")) {
-    loginForm.style.display = "block";
-  }
-
-  // Авторизация
-  function login() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    auth.signInWithEmailAndPassword(email, password)
-      .then(() => {
-        loginForm.style.display = "none";
-        adminPanel.style.display = "block";
-      })
-      .catch((error) => alert("Ошибка входа: " + error.message));
-  }
-
-  // Добавление поста
-  async function addPost() {
-    const title = document.getElementById("postTitle").value.trim();
-    const text = document.getElementById("postText").value.trim();
-    if (title && text) {
-      await db.collection("posts").add({
-        title,
-        text,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      document.getElementById("postTitle").value = "";
-      document.getElementById("postText").value = "";
-    }
-  }
-
-  // Вывод постов
   db.collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
     postsContainer.innerHTML = "";
     snapshot.forEach((doc) => {
@@ -505,15 +433,8 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
       postsContainer.appendChild(wrapper);
     });
   });
-
-  // Если авторизован и есть ?Julia.Jour — показываем панель
-  auth.onAuthStateChanged((user) => {
-    if (user && window.location.search.includes("?Julia.Jour")) {
-      adminPanel.style.display = "block";
-      loginForm.style.display = "none";
-    }
-  });
 </script>
+	
 
 	
 
