@@ -465,65 +465,10 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
       alert("Ошибка отправки. Попробуйте позже.");
     }
   });
-	// Инициализация Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
-    authDomain: "julia-profile-site.firebaseapp.com",
-    projectId: "julia-profile-site",
-    storageBucket: "julia-profile-site.firebasestorage.app",
-    messagingSenderId: "539619849387",
-    appId: "1:539619849387:web:4af99cad0ff10b0ba233ee"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore(); // база данных
-  const auth = firebase.auth();    // авторизация
-	
-	// Скрипт работы с Firebase
-const postsContainer = document.getElementById('latestPosts');
-  const adminForm = document.getElementById('adminForm');
-
-  // Загрузка актуальных постов
-  firebase.firestore().collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
-    postsContainer.innerHTML = ""; // очищаем
-    snapshot.forEach((doc) => {
-      const post = document.createElement("p");
-      post.textContent = doc.data().text;
-      postsContainer.appendChild(post);
-    });
-  });
-
-  // Добавление поста (если админ)
-  function addPost() {
-    const text = document.getElementById("newPostText").value.trim();
-    if (text) {
-      firebase.firestore().collection("posts").add({
-        text: text,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(() => {
-        document.getElementById("newPostText").value = "";
-      });
-    }
-  }
-	
-// Авторизация администратора
-	  function adminLogin() {
-    const password = prompt("Введите пароль:");
-    if (password === "julia2025") { // 🔒 Задай свой
-      adminForm.style.display = "block";
-      alert("Добро пожаловать, админ!");
-    } else {
-      alert("Неверный пароль");
-    }
-  }
 </script>
-
-
-
-
-
-<!-- === Firebase логика для микроблога и входа === -->
+	
 <script>
+  // Firebase конфиг
   const firebaseConfig = {
     apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
     authDomain: "julia-profile-site.firebaseapp.com",
@@ -533,18 +478,21 @@ const postsContainer = document.getElementById('latestPosts');
     appId: "1:539619849387:web:4af99cad0ff10b0ba233ee"
   };
 
+  // Инициализация Firebase
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
   const auth = firebase.auth();
 
   const postsContainer = document.getElementById('latestPosts');
-  const adminPanel = document.getElementById('adminPanel');
   const loginForm = document.getElementById('loginForm');
+  const adminPanel = document.getElementById('adminPanel');
 
+  // Показываем форму входа, если параметр ?Julia.Jour в URL
   if (window.location.search.includes("?Julia.Jour")) {
     loginForm.style.display = "block";
   }
 
+  // Авторизация
   function login() {
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
@@ -556,13 +504,14 @@ const postsContainer = document.getElementById('latestPosts');
       .catch((error) => alert("Ошибка входа: " + error.message));
   }
 
+  // Добавление поста
   async function addPost() {
     const title = document.getElementById("postTitle").value.trim();
     const text = document.getElementById("postText").value.trim();
     if (title && text) {
       await db.collection("posts").add({
-        title: title,
-        text: text,
+        title,
+        text,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       });
       document.getElementById("postTitle").value = "";
@@ -570,6 +519,7 @@ const postsContainer = document.getElementById('latestPosts');
     }
   }
 
+  // Вывод постов
   db.collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
     postsContainer.innerHTML = "";
     snapshot.forEach((doc) => {
@@ -584,12 +534,16 @@ const postsContainer = document.getElementById('latestPosts');
     });
   });
 
+  // Если авторизован и есть ?Julia.Jour — показываем панель
   auth.onAuthStateChanged((user) => {
     if (user && window.location.search.includes("?Julia.Jour")) {
       adminPanel.style.display = "block";
+      loginForm.style.display = "none";
     }
   });
 </script>
+
+	
 
 </body>
 </html>
