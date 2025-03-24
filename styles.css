@@ -29,16 +29,6 @@ p, li {
   line-height: 1.8;
 }
 
-/* Фоновый декоративный элемент */
-.background-elements {
-  position: fixed;
-  inset: 0;
-  opacity: 0.3;
-  z-index: -1;
-  /* Возможный декоративный фон */
-  /* background: linear-gradient(to right, transparent 95%, #ddd 96%); */
-}
-
 /* === ХЭДЕР И НАВИГАЦИЯ === */
 header {
   background-color: #1e1e1e;
