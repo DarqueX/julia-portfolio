@@ -437,17 +437,15 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
     postsContainer.innerHTML = "";
     snapshot.forEach((doc) => {
       const post = doc.data();
-      const wrapper = document.createElement("div");
-     const formattedText = (post.text || "").split('\n').map(line => `<p>${line}</p>`).join('');
+     const wrapper = document.createElement("div");
+wrapper.classList.add("post"); // добавим нужный класс
+const formattedText = (post.text || "").split('\n').map(line => `<p>${line}</p>`).join('');
 wrapper.innerHTML = `
-  wrapper.innerHTML = `
   <h3 class="post-title">${post.title || "Без заголовка"}</h3>
   ${formattedText}
-  <hr>
 `;
-  ${formattedText}
-  <hr>
-`;
+
+
 postsContainer.appendChild(wrapper);
     });
   });
