@@ -491,12 +491,23 @@ body.modal-open .scroll-button {
   text-align: center;
 }
 
-#loginForm input, #adminPanel input, #adminPanel textarea, #loginForm button, #adminPanel button {
+#loginForm input, #loginForm button, #adminPanel button {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
   font-family: inherit;
 }
+
+#adminPanel textarea {
+  height: 300px;              /* Увеличено по высоте */
+  resize: vertical;           /* Можно растягивать */
+  white-space: pre-wrap;      /* Сохраняет абзацы и переносы */
+  font-family: inherit;
+}
+#adminPanel input {
+  font-size: 1rem;
+}
+
 
 #latestPosts {
   max-height: 400px;
