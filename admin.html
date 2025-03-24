@@ -102,6 +102,10 @@
   const title = document.getElementById("postTitle").value.trim();
   const text = document.getElementById("postText").value.trim();
 
+     // Временный лог
+     console.log("Заголовок:", title);
+    console.log("Текст:", text);
+
   if (title && text) {
     await db.collection("posts").add({
       title: title,
