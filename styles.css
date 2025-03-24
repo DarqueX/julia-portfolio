@@ -499,7 +499,7 @@ body.modal-open .scroll-button {
 }
 
 #adminPanel textarea {
-  height: 300px;              /* Увеличено по высоте */
+  height: 600px;              /* Увеличено по высоте */
   resize: vertical;           /* Можно растягивать */
   white-space: pre-wrap;      /* Сохраняет абзацы и переносы */
   font-family: inherit;
