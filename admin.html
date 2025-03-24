@@ -39,6 +39,8 @@
     }
   </style>
 
+  
+
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
@@ -59,6 +61,13 @@
     <textarea id="postText" placeholder="Текст публикации"></textarea>
     <button onclick="addPost()">Опубликовать</button>
   </div>
+
+ <-- Ссылка на главную страницу -->
+  <a href="index.html" style="display:block; margin-top: 1rem; text-align:center;">← На главную</a>
+
+
+  <-- Кнопка выхода -->
+  <button onclick="logout()">Выйти</button>
 
   <script>
     const firebaseConfig = {
@@ -116,6 +125,14 @@
     document.getElementById("loginPassword").addEventListener("keypress", function (e) {
       if (e.key === "Enter") login();
     });
+
+    // Кнопка выхода
+    function logout() {
+  auth.signOut().then(() => {
+    adminPanel.style.display = "none";
+    loginForm.style.display = "block";
+  });
+}
   </script>
 
 </body>
