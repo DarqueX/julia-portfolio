@@ -11,9 +11,10 @@
 <link href="styles.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
 
-<!-- === Firebase SDKs === -->
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+<!-- ✅ Правильные Firebase SDK для браузера -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
 <!-- ✅ Добавлены Firebase SDKs: app, auth, firestore -->
 
 </head>
@@ -434,7 +435,19 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
   });
 </script>
 	
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
+    authDomain: "julia-profile-site.firebaseapp.com",
+    projectId: "julia-profile-site",
+    storageBucket: "julia-profile-site.appspot.com",
+    messagingSenderId: "539619849387",
+    appId: "1:539619849387:web:4af99cad0ff10b0ba233ee"
+  };
 
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
 	
 
 </body>
