@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админка — Юлия Василевская</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    #loginForm, #adminPanel {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      font-size: 1rem;
+    }
+    button {
+      cursor: pointer;
+      background: #333;
+      color: white;
+      border: none;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #000;
+    }
+  </style>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+</head>
+<body>
+
+  <div id="loginForm">
+    <h2>Вход в админку</h2>
+    <input id="loginEmail" type="email" placeholder="Email" required>
+    <input id="loginPassword" type="password" placeholder="Пароль" required>
+    <button onclick="login()">Войти</button>
+  </div>
+
+  <div id="adminPanel" style="display:none">
+    <h2>Добавить публикацию</h2>
+    <input id="postTitle" type="text" placeholder="Заголовок">
+    <textarea id="postText" placeholder="Текст публикации"></textarea>
+    <button onclick="addPost()">Опубликовать</button>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBph0OE68RE_vo0XOjCaPweyqQNR-rJVkI",
+      authDomain: "julia-profile-site.firebaseapp.com",
+      projectId: "julia-profile-site",
+      storageBucket: "julia-profile-site.appspot.com",
+      messagingSenderId: "539619849387",
+      appId: "1:539619849387:web:4af99cad0ff10b0ba233ee"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    const loginForm = document.getElementById('loginForm');
+    const adminPanel = document.getElementById('adminPanel');
+
+    function login() {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          loginForm.style.display = "none";
+          adminPanel.style.display = "block";
+        })
+        .catch((error) => alert("Ошибка входа: " + error.message));
+    }
+
+    async function addPost() {
+      const title = document.getElementById("postTitle").value.trim();
+      const text = document.getElementById("postText").value.trim();
+      if (title && text) {
+        await db.collection("posts").add({
+          title,
+          text,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+          document.getElementById("postTitle").value = "";
+          document.getElementById("postText").value = "";
+          alert("Пост опубликован!");
+        }).catch(err => alert("Ошибка: " + err.message));
+      } else {
+        alert("Пожалуйста, заполните заголовок и текст.");
+      }
+    }
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        loginForm.style.display = "none";
+        adminPanel.style.display = "block";
+      }
+    });
+
+    document.getElementById("loginPassword").addEventListener("keypress", function (e) {
+      if (e.key === "Enter") login();
+    });
+  </script>
+
+</body>
+</html>
