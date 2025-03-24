@@ -98,23 +98,25 @@
         .catch((error) => alert("Ошибка входа: " + error.message));
     }
 
-    async function addPost() {
-      const title = document.getElementById("postTitle").value.trim();
-      const text = document.getElementById("postText").value.trim();
-      if (title && text) {
-        await db.collection("posts").add({
-          title,
-          text,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(() => {
-          document.getElementById("postTitle").value = "";
-          document.getElementById("postText").value = "";
-          alert("Пост опубликован!");
-        }).catch(err => alert("Ошибка: " + err.message));
-      } else {
-        alert("Пожалуйста, заполните заголовок и текст.");
-      }
-    }
+   async function addPost() {
+  const title = document.getElementById("postTitle").value.trim();
+  const text = document.getElementById("postText").value.trim();
+
+  if (title && text) {
+    await db.collection("posts").add({
+      title: title,
+      text: text,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+      document.getElementById("postTitle").value = "";
+      document.getElementById("postText").value = "";
+      alert("Пост опубликован!");
+    }).catch(err => alert("Ошибка: " + err.message));
+  } else {
+    alert("Пожалуйста, заполните заголовок и текст.");
+  }
+}
+
 
     auth.onAuthStateChanged((user) => {
       if (user) {
