@@ -507,7 +507,7 @@ textarea {
 
 
 #latestPosts {
-  max-width: 1100px;      /* Увеличить ширину */
+  max-width: 800px;      /* Увеличить ширину */
   margin: 2rem auto;     /* Центрирование */
   padding: 2rem;
   background: white;
