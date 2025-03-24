@@ -522,4 +522,11 @@ textarea {
   color: #111;
 }
 
+.post {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 2rem;
+}
+
+
 
