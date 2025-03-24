@@ -35,26 +35,6 @@
 
 </header>
 <main>
-
-<!-- === Блок формы входа для администратора (виден только при ?Julia.Jour) === -->
-<div id="loginForm" style="display:none;">
-  <h3>Вход для администратора</h3>
-  <input type="email" id="loginEmail" placeholder="Email" required />
-  <input type="password" id="loginPassword" placeholder="Пароль" required />
-  <button onclick="login()">Войти</button>
-</div>
-
-<!-- === Админская панель (видна после входа) === -->
-<div id="adminPanel" style="display:none;">
-  <h3>Добавить публикацию</h3>
-  <input type="text" id="postTitle" placeholder="Заголовок" />
-  <textarea id="postText" placeholder="Текст"></textarea>
-  <button onclick="addPost()">Опубликовать</button>
-</div>
-
-<h1 align="center">Юлия Василевская</h1>
-
-
 <section id="about" data-aos="zoom-in">
 <h2>Обо мне</h2>
 <img alt="Фото Юлии" src="photo.jpg" style="float: left; margin: 0 20px 20px 0; width: 250px; border-radius: 12px;"/><p>Я — журналист, копирайтер и редактор с более чем шестилетним опытом работы в сфере текстов и медиа. Моё профессиональное портфолио охватывает широкий спектр форматов: от репортажей и интервью до SEO-оптимизированных статей, брендированного контента и экспертных колонок.
@@ -254,30 +234,22 @@
   <div id="latestPosts" class="microblog-scroll"></div>
 </section>
 	
-	<!-- ===Форма авторизации в HTML === -->
-<div id="loginForm" style="display:none">
-  <h3>Вход в админ-панель</h3>
-  <input id="loginEmail" type="email" placeholder="Email" required>
-  <input id="loginPassword" type="password" placeholder="Пароль" required>
-  <button onclick="login()">Войти</button>
-</div>
+ <!-- Форма входа -->
+      <div id="loginForm" style="display:none">
+        <h3>Вход в админ-панель</h3>
+        <input id="loginEmail" type="email" placeholder="Email" required>
+        <input id="loginPassword" type="password" placeholder="Пароль" required>
+        <button onclick="login()">Войти</button>
+      </div>
 
-	<!-- ===панель администратора === -->
-<div id="adminPanel" style="display:none">
-  <h3>Добавить публикацию</h3>
-  <input id="postTitle" type="text" placeholder="Заголовок">
-  <textarea id="postText" placeholder="Текст публикации"></textarea>
-  <button onclick="addPost()">Опубликовать</button>
-</div>
-
-
-
-  <!-- Админская форма (по умолчанию скрыта) -->
-  <div id="adminForm" style="display: none; margin-top: 1rem;">
-    <textarea id="newPostText" placeholder="Новая заметка..." rows="4" style="width: 100%;"></textarea>
-    <button onclick="addPost()">Добавить</button>
-  </div>
-</section>
+    <!-- Админская панель -->
+      <div id="adminPanel" style="display:none">
+        <h3>Добавить публикацию</h3>
+        <input id="postTitle" type="text" placeholder="Заголовок">
+        <textarea id="postText" placeholder="Текст публикации"></textarea>
+        <button onclick="addPost()">Опубликовать</button>
+      </div>
+    </section>
 
 
 
