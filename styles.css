@@ -15,6 +15,8 @@ body {
   text-align: justify;
   margin: 0;
   padding: 0;
+  color: #1a1a1a;
+  background-color: #ffffff;
   background-image: url('background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -25,6 +27,16 @@ body {
 /* Межстрочный интервал для абзацев и списков */
 p, li {
   line-height: 1.8;
+}
+
+/* Фоновый декоративный элемент */
+.background-elements {
+  position: fixed;
+  inset: 0;
+  opacity: 0.3;
+  z-index: -1;
+  /* Возможный декоративный фон */
+  /* background: linear-gradient(to right, transparent 95%, #ddd 96%); */
 }
 
 /* === ХЭДЕР И НАВИГАЦИЯ === */
