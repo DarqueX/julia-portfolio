@@ -438,12 +438,13 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
     snapshot.forEach((doc) => {
       const post = doc.data();
       const wrapper = document.createElement("div");
-      wrapper.innerHTML = `
-        <p><strong>${post.title || "Без заголовка"}</strong></p>
-        <p>${post.text}</p>
-        <hr>
-      `;
-      postsContainer.appendChild(wrapper);
+     const formattedText = (post.text || "").split('\n').map(line => `<p>${line}</p>`).join('');
+wrapper.innerHTML = `
+  <p><strong>${post.title || "Без заголовка"}</strong></p>
+  ${formattedText}
+  <hr>
+`;
+postsContainer.appendChild(wrapper);
     });
   });
 </script>
