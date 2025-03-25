@@ -216,45 +216,124 @@ window.addEventListener("DOMContentLoaded", () => {
 // Редактирование портфолио
 
 
-async function addPortfolioCard() {
-  const storage = firebase.app().storage();
-  const category = document.getElementById("portfolioCategory").value;
-  const title = document.getElementById("portfolioTitle").value.trim();
-  const description = document.getElementById("portfolioDescription").value.trim();
-  const file = document.getElementById("portfolioFile").files[0];
+ async function addPortfolioCard() {
+    const accessKeyId = 'ВАШ_ACCESS_KEY';
+    const secretAccessKey = 'ВАШ_SECRET_KEY';
+    const bucketName = 'portfolio-files';
+    const region = 'ru-central1'; // регион Яндекс.Облака
+    const folder = 'portfolio';
 
-  if (!title || !description || !file) {
-    alert("Пожалуйста, заполните все поля и выберите PDF-файл.");
-    return;
+    const category = document.getElementById("portfolioCategory").value;
+    const title = document.getElementById("portfolioTitle").value.trim();
+    const description = document.getElementById("portfolioDescription").value.trim();
+    const file = document.getElementById("portfolioFile").files[0];
+
+    if (!title || !description || !file) {
+      alert("Пожалуйста, заполните все поля и выберите PDF-файл.");
+      return;
+    }
+
+    if (file.type !== "application/pdf") {
+      alert("Пожалуйста, выберите файл в формате PDF.");
+      return;
+    }
+
+    try {
+      // 1. Получаем текущую дату
+      const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      const service = 's3';
+      const host = `${bucketName}.storage.yandexcloud.net`;
+      const algorithm = 'AWS4-HMAC-SHA256';
+      const credentialScope = `${date}/${region}/${service}/aws4_request`;
+      const filePath = `${folder}/${file.name}`;
+      const url = `https://${host}/${filePath}`;
+
+      // 2. Генерируем подпись
+      const encoder = new TextEncoder();
+      const hash = await crypto.subtle.digest('SHA-256', file);
+      const payloadHash = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+      const amzDate = new Date().toISOString().replace(/[:-]|\.\d{3}/g, '');
+      const canonicalRequest = [
+        'PUT',
+        `/${filePath}`,
+        '',
+        `host:${host}`,
+        `x-amz-content-sha256:${payloadHash}`,
+        `x-amz-date:${amzDate}`,
+        '',
+        'host;x-amz-content-sha256;x-amz-date',
+        payloadHash
+      ].join('\n');
+
+      const stringToSign = [
+        algorithm,
+        amzDate,
+        credentialScope,
+        await sha256(canonicalRequest)
+      ].join('\n');
+
+      const signingKey = await getSignatureKey(secretAccessKey, date, region, service);
+      const signature = await hmacSha256Hex(signingKey, stringToSign);
+
+      const authorizationHeader = `${algorithm} Credential=${accessKeyId}/${credentialScope}, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=${signature}`;
+
+      // 3. Загружаем файл через fetch
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Authorization': authorizationHeader,
+          'x-amz-date': amzDate,
+          'x-amz-content-sha256': payloadHash
+        },
+        body: file
+      });
+
+      if (!response.ok) throw new Error('Ошибка загрузки файла');
+
+      // 4. Сохраняем карточку в Firestore
+      await db.collection("portfolio").add({
+        category,
+        title,
+        description,
+        fileName: file.name,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      alert("Карточка добавлена!");
+    } catch (error) {
+      alert("Ошибка: " + error.message);
+      console.error(error);
+    }
   }
 
-if (file.type !== "application/pdf") {
-  alert("Пожалуйста, выберите файл в формате PDF.");
-  return;
-}
+  async function sha256(str) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(str);
+    const hash = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
 
-  // Загружаем PDF в Storage
-  const storageRef = storage.ref(`portfolio/${file.name}`);
-  await storageRef.put(file);
+  async function hmacSha256Hex(key, msg) {
+    const enc = new TextEncoder();
+    const cryptoKey = await crypto.subtle.importKey('raw', key, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const signature = await crypto.subtle.sign('HMAC', cryptoKey, enc.encode(msg));
+    return Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
 
-  // Получаем ссылку
-  const fileUrl = await storageRef.getDownloadURL();
+  async function getSignatureKey(key, dateStamp, regionName, serviceName) {
+    const kDate = await hmacSha256(`AWS4${key}`, dateStamp);
+    const kRegion = await hmacSha256(kDate, regionName);
+    const kService = await hmacSha256(kRegion, serviceName);
+    return await hmacSha256(kService, 'aws4_request', true);
+  }
 
-  // Сохраняем в Firestore
-  await db.collection("portfolio").add({
-    category,
-    title,
-    description,
-    fileName: file.name,
-    fileUrl,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  });
-
-  alert("Карточка добавлена!");
-  document.getElementById("portfolioTitle").value = "";
-  document.getElementById("portfolioDescription").value = "";
-  document.getElementById("portfolioFile").value = "";
-}
+  async function hmacSha256(key, msg, returnRaw = false) {
+    const enc = new TextEncoder();
+    const cryptoKey = await crypto.subtle.importKey('raw', typeof key === 'string' ? enc.encode(key) : key, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const signature = await crypto.subtle.sign('HMAC', cryptoKey, enc.encode(msg));
+    return returnRaw ? signature : new Uint8Array(signature);
+  }
 
     
   </script>
