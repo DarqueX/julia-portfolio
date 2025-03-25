@@ -520,18 +520,20 @@ margin: 3rem auto;
   box-shadow: 0 0 15px rgba(0,0,0,0.05);
 
   max-height: 700px;        /* ← Ограничиваем высоту */
-  overflow-y: auto;         /* ← Включаем прокрутку */
+  overflow-y: scroll;         /* ← Включаем прокрутку */
   scrollbar-width: thin; /* для Firefox */
    -webkit-overflow-scrolling: touch; /* для IOS */
+   scrollbar-color: rgba(0,0,0,0.3) transparent; /* Firefox */
+
 }
 
 #latestPosts::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 #latestPosts::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  border-radius: 4px;
 }
 .post-title {
   font-size: 1.8rem; /* увеличено */
@@ -545,10 +547,15 @@ margin: 3rem auto;
   margin-bottom: 3rem;
   border-bottom: 1px solid #ddd;
   padding-bottom: 2rem;
+  padding: 16px;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .post p {
   white-space: pre-wrap;
+  text-align: left !important;
 }
 
 
