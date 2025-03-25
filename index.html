@@ -405,7 +405,11 @@ db.collection("portfolio").orderBy("timestamp", "desc").onSnapshot((snapshot) =>
         <h3>${data.title}</h3>
         <p>${data.description}</p>
       `;
-      card.onclick = () => openPdfModal(data.description, `portfolio/${data.fileName}`);
+     card.onclick = () => {
+  const fileUrl = `https://storage.yandexcloud.net/portfolio-files/portfolio/${data.fileName}`;
+  openPdfModal(data.description, fileUrl);
+};
+
       container.prepend(card); // новая карточка — первой
     }
   });
