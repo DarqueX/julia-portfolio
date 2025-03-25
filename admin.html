@@ -63,6 +63,18 @@
     <button onclick="addPost()">Опубликовать</button>
   </div>
 
+  
+<!-- Переключение стиля заголовков -->
+ <label for="heading-style">Стиль заголовков:</label>
+<select id="heading-style" onchange="changeHeadingStyle(this.value)">
+  <option value="default">Чёрный фон (по умолчанию)</option>
+  <option value="gradient">Градиент</option>
+  <option value="glow">Светящийся</option>
+  <option value="animated">Анимация</option>
+  <option value="glass">Полупрозрачный / blur</option>
+  <option value="bordered">С левой цветной полосой</option>
+</select>
+
  <!-- Ссылка на главную страницу -->
   <a href="index.html" style="display:block; margin-top: 1rem; text-align:center;">← На главную</a>
 
@@ -140,6 +152,21 @@
     loginForm.style.display = "block";
   });
 }
+    
+  // Переключение стилей заголовков 
+  function changeHeadingStyle(style) {
+    const body = document.body;
+    const allStyles = ['default', 'gradient', 'glow', 'animated', 'glass', 'bordered'];
+
+    // Удаляем все стили
+    allStyles.forEach(s => body.classList.remove(`heading-${s}`));
+
+    // Добавляем выбранный
+    if (style !== 'default') {
+      body.classList.add(`heading-${style}`);
+    }
+  }
+    
   </script>
 
 </body>
