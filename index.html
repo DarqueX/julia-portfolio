@@ -282,8 +282,9 @@ function openPdfModal(title, filename) {
   const downloadBtn = modal.querySelector('.download-btn');
 
   header.textContent = title;
-  iframe.src = `files/${filename}#toolbar=0&navpanes=0&scrollbar=0`;
-  downloadBtn.href = `files/${filename}`;
+  iframe.src = `${filename}#toolbar=0&navpanes=0&scrollbar=0`;
+downloadBtn.href = filename;
+
 
   modal.style.display = 'block';
   document.getElementById("scrollTopBtn").style.display = "none";
@@ -429,6 +430,23 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
 
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
+	// Получаем карточки портфолио
+db.collection("portfolio").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    const container = document.getElementById(`portfolio-scroll-${data.category}`);
+    if (container) {
+      const card = document.createElement("div");
+      card.className = "portfolio-card";
+      card.innerHTML = `
+        <h3>${data.title}</h3>
+        <p>${data.description}</p>
+      `;
+      card.onclick = () => openPdfModal(data.description, `portfolio/${data.fileName}`);
+      container.prepend(card); // новая карточка — первой
+    }
+  });
+});
 	// отображение постов
 	const postsContainer = document.getElementById('latestPosts');
 
