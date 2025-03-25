@@ -505,7 +505,7 @@ body.modal-open .scroll-button {
     font-size: 1.2rem;
     text-align: center;
   }
-  h4.portfolio-category-title {
+  .portfolio-category-title {
   display: block;
   width: fit-content;
   margin: 0 auto 1.5rem auto;
