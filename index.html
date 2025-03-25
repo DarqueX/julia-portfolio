@@ -454,6 +454,24 @@ const savedStyle = localStorage.getItem("headingStyle");
 if (savedStyle) {
   document.body.classList.add("heading-" + savedStyle);
 }
+
+	function applyHeadingStyle() {
+  const savedStyle = localStorage.getItem("headingStyle");
+  const body = document.body;
+  const allStyles = ['default', 'gradient', 'glow', 'animated', 'glass', 'bordered', 'cutout', 'outline', 'shadow', 'glass-blur', 'outlinefix'];
+
+  // Удаляем все старые классы
+  allStyles.forEach(style => body.classList.remove("heading-" + style));
+
+  // Добавляем выбранный класс (если не default)
+  if (savedStyle && savedStyle !== 'default') {
+    body.classList.add("heading-" + savedStyle);
+  }
+}
+
+// Вызываем при загрузке
+applyHeadingStyle();
+
 </script>
 	
 </body>
