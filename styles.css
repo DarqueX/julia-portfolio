@@ -124,20 +124,10 @@ h2 {
   padding: 0.5rem 1rem;
   margin-bottom: 20px;
   position: relative;
+
+  border-radius: 8px; /* закруглённые края */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* объём */
 }
-
-/* Добавим вертикальную полоску слева */
-h2::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 10%;
-  bottom: 10%;
-  width: 5px;
-  background-color: #fff; /* Белая полоса */
-}
-
-
 
 
 
