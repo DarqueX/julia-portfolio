@@ -210,9 +210,7 @@ footer {
   cursor: pointer;
   scroll-snap-align: start;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow-x: hidden;
- 
+  position: relative; 
 }
 
 .portfolio-card:hover {
