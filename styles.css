@@ -115,9 +115,8 @@ h1 {
 h2 {
   display: block;
   width: fit-content;
-  background-color: #111;
-  color: #fff;
-  text-shadow: 0 0 5px #fff, 0 0 10px #999;
+  background-color: #111; /* Чёрный фон */
+  color: #fff; /* Белый текст */
   font-size: 32px;
   font-weight: 600;
   text-transform: uppercase;
@@ -125,14 +124,17 @@ h2 {
   padding: 0.5rem 1rem;
   margin-bottom: 20px;
   position: relative;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+
+  border-radius: 8px; /* закруглённые края */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* объём */
 }
 
 /* === Градиент === */
 body.heading-gradient h2 {
-  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  background: linear-gradient(to right, #000, #444, #888, #444, #000);
   color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 /* === Светящийся === */
@@ -145,17 +147,20 @@ body.heading-glow h2 {
 
 /* === Анимированный фон === */
 body.heading-animated h2 {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(270deg, #111, #999, #111);
   background-size: 400% 400%;
-  animation: gradientFlow 8s ease infinite;
+  animation: headingSlideBW 8s ease infinite;
   color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-@keyframes gradientFlow {
+@keyframes headingSlideBW {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
 
 /* === Стеклянный (blur) стиль === */
 body.heading-glass h2 {
