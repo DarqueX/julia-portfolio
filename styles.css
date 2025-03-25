@@ -298,11 +298,12 @@ footer {
 
 .modal-content iframe {
   flex-grow: 1;
-  width: 100%;
-  height: 100%;
+  width: 900px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
   border: none;
-  allign: center;
-  margin: 0 auto; /* ← вот это важно */
+  height: 100%;
 }
 
 /* Крестик закрытия модального окна */
