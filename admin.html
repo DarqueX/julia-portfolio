@@ -80,6 +80,24 @@
 
   <!-- Кнопка выхода -->
   <button onclick="logout()">Выйти</button>
+
+    <!-- Редактирование Портфолио -->
+    <hr>
+<h2>Добавить карточку в портфолио</h2>
+
+<label for="category">Категория:</label>
+<select id="portfolioCategory">
+  <option value="колонка">Журналистика</option>
+  <option value="посты-для-соцсетей">Социальные сети</option>
+  <option value="seo-статьи">Копирайтинг и Брендинг</option>
+</select>
+
+<input id="portfolioTitle" type="text" placeholder="Название работы">
+<input id="portfolioDescription" type="text" placeholder="Описание или тип текста">
+<input id="portfolioFile" type="file" accept="application/pdf">
+
+<button onclick="addPortfolioCard()">Добавить карточку</button>
+
   </div>
 
    <!-- Ссылка на главную страницу -->
@@ -185,6 +203,44 @@ window.addEventListener("DOMContentLoaded", () => {
     styleSelector.value = savedStyle;
   }
 });
+
+// Редактирование портфолио
+const storage = firebase.storage();
+
+async function addPortfolioCard() {
+  const category = document.getElementById("portfolioCategory").value;
+  const title = document.getElementById("portfolioTitle").value.trim();
+  const description = document.getElementById("portfolioDescription").value.trim();
+  const file = document.getElementById("portfolioFile").files[0];
+
+  if (!title || !description || !file) {
+    alert("Пожалуйста, заполните все поля и выберите PDF-файл.");
+    return;
+  }
+
+  // Загружаем PDF в Storage
+  const storageRef = storage.ref(`portfolio/${file.name}`);
+  await storageRef.put(file);
+
+  // Получаем ссылку
+  const fileUrl = await storageRef.getDownloadURL();
+
+  // Сохраняем в Firestore
+  await db.collection("portfolio").add({
+    category,
+    title,
+    description,
+    fileName: file.name,
+    fileUrl,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  alert("Карточка добавлена!");
+  document.getElementById("portfolioTitle").value = "";
+  document.getElementById("portfolioDescription").value = "";
+  document.getElementById("portfolioFile").value = "";
+}
+
     
   </script>
 
