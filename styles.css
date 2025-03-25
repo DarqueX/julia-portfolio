@@ -558,17 +558,6 @@ textarea {
   text-align: left !important;
 }
 
-/* === прелоадер для публикаций === */
-#loader {
-  font-size: 18px;
-  color: #555;
-}
-#latestPosts.loaded {
-  display: block;
-}
-#latestPosts:not(.loaded) {
-  display: none;
-}
 
 
 
