@@ -112,21 +112,14 @@ h1 {
 
 /* ===  Стилизация заголовков === */
 
-/* === Общий стиль заголовков по умолчанию === */
+/* === Общий стиль заголовков по умолчанию с чертой слева === */
 h2 {
-  display: block;
-  width: fit-content;
-  background-color: #111;
-  color: #fff;
-  font-size: 22px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 0.5rem 1rem;
-  margin-bottom: 20px;
-  position: relative;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+  color: #111;
+  padding-left: 1.5rem;
+  border-left: 5px solid #ff5e5e;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* === Градиент === */
@@ -165,14 +158,22 @@ body.heading-glass h2 {
   border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* === С левой цветной полосой === */
+/* === Черный фон === */
 body.heading-bordered h2 {
-  background-color: transparent;
-  color: #111;
-  padding-left: 1.5rem;
-  border-left: 5px solid #ff5e5e;
-  border-radius: 0;
-  box-shadow: none;
+  display: block;
+  width: fit-content;
+  background-color: #111;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 20px;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
 }
 
 /* === Glass Blur (прозрачный дымчатый) === */
@@ -196,6 +197,22 @@ body.heading-outlinefix h2 {
   box-shadow: none;
 }
 
+/* === Оформление категории портфолио === */
+.portfolio-category-title {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 1.5rem auto;
+  background-color: #000;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
 
 
 
