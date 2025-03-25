@@ -448,6 +448,12 @@ wrapper.innerHTML = `
 postsContainer.appendChild(wrapper);
     });
   });
+
+	// Проверяем и применяем стиль заголовков из localStorage
+const savedStyle = localStorage.getItem("headingStyle");
+if (savedStyle) {
+  document.body.classList.add("heading-" + savedStyle);
+}
 </script>
 	
 </body>
