@@ -192,7 +192,7 @@ body.heading-glass h2 {
 }
 
 /* === Стиль “Bordered” (только рамка, без заливки) === */
-body.heading-bordered h2 {
+body.heading-bordered1 h2 {
   background: none;
   color: #111;
   border: 2px solid #111;
