@@ -45,6 +45,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+
 
 </head>
 <body>
@@ -223,6 +225,11 @@ async function addPortfolioCard() {
     alert("Пожалуйста, заполните все поля и выберите PDF-файл.");
     return;
   }
+
+if (file.type !== "application/pdf") {
+  alert("Пожалуйста, выберите файл в формате PDF.");
+  return;
+}
 
   // Загружаем PDF в Storage
   const storageRef = storage.ref(`portfolio/${file.name}`);
