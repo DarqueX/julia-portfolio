@@ -521,8 +521,17 @@ margin: 3rem auto;
 
   max-height: 700px;        /* ← Ограничиваем высоту */
   overflow-y: auto;         /* ← Включаем прокрутку */
+  scrollbar-width: thin; /* для Firefox */
 }
 
+#latestPosts::-webkit-scrollbar {
+  width: 6px;
+}
+
+#latestPosts::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
 .post-title {
   font-size: 1.8rem; /* увеличено */
   font-weight: 700;
@@ -536,6 +545,11 @@ margin: 3rem auto;
   border-bottom: 1px solid #ddd;
   padding-bottom: 2rem;
 }
+
+.post p {
+  white-space: pre-wrap;
+}
+
 
 
 
