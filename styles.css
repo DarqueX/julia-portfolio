@@ -103,7 +103,7 @@ section {
 }
 
 /* Заголовки секций */
-h1, h2 {
+h1 {
   font-weight: 600;
   margin-bottom: 20px; 
 }
@@ -112,7 +112,7 @@ h1, h2 {
 
 /* ===  Стилизация заголовков === */
 
-.section-title {
+h2 {
   background-color: #111; /* Чёрный фон */
   color: #fff; /* Белый текст */
   font-size: 32px;
