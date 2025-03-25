@@ -113,6 +113,8 @@ h1 {
 /* ===  Стилизация заголовков === */
 
 h2 {
+  display: block;
+  width: fit-content;
   background-color: #111; /* Чёрный фон */
   color: #fff; /* Белый текст */
   font-size: 32px;
@@ -121,7 +123,6 @@ h2 {
   letter-spacing: 2px;
   padding: 0.5rem 1rem;
   margin-bottom: 20px;
-  display: inline-block;
   position: relative;
 }
 
