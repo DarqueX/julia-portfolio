@@ -181,7 +181,7 @@ body.heading-bordered h2 {
 }
 
 /* === Стиль “Glass” (полупрозрачный с размытой дымкой) === */
-body.heading-glass h2 {
+body.heading-glass-blur h2 {
   background: rgba(255, 255, 255, 0.05);
   color: #fff;
   backdrop-filter: blur(6px);
