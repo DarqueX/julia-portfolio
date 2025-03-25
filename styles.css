@@ -115,8 +115,8 @@ h1 {
 h2 {
   display: block;
   width: fit-content;
-  background: linear-gradient(135deg, #1a1a1a, #333); /* Градиент */
-  color: #fff;
+  background-color: #f4f4f4;
+  color: #111;
   font-size: 32px;
   font-weight: 600;
   text-transform: uppercase;
@@ -125,9 +125,10 @@ h2 {
   margin-bottom: 20px;
   position: relative;
 
-  border-radius: 12px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
+
 
 
 
