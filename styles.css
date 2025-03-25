@@ -211,7 +211,7 @@ footer {
   scroll-snap-align: start;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
  
 }
 
@@ -521,7 +521,7 @@ margin: 3rem auto;
   font-size: 16px;
   line-height: 1.6;
 
-  max-height: 700px;        /* ← Ограничиваем высоту */
+  max-height: 60vh;        /* ← Ограничиваем высоту */
   overflow-y: scroll;         /* ← Включаем прокрутку */
   scrollbar-width: thin; /* для Firefox */
    -webkit-overflow-scrolling: touch; /* для IOS */
