@@ -230,10 +230,7 @@
 	
 <!-- === Микроблог "Актуальное" === -->
 <section id="latest">
-  <h2>Актуальное</h2>
-	<div id="loader" style="text-align:center; margin-top: 2rem;">
-  		Загрузка публикаций...
-	</div>
+  <h2>Актуальное</h2>	
   	<div id="latestPosts" class="microblog-scroll"></div>
 </section> 
 
@@ -435,9 +432,6 @@ document.querySelectorAll('.portfolio-scroll-container').forEach(container => {
 	// отображение постов
 	const postsContainer = document.getElementById('latestPosts');
 
-const loader = document.getElementById('loader');
-const postsContainer = document.getElementById('latestPosts');
-	
   db.collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
     postsContainer.innerHTML = "";
     snapshot.forEach((doc) => {
@@ -453,8 +447,6 @@ wrapper.innerHTML = `
 
 postsContainer.appendChild(wrapper);
     });
-	  loader.style.display = 'none';
-  postsContainer.classList.add('loaded');
   });
 </script>
 	
