@@ -208,7 +208,6 @@ body.heading-cutout h2 {
   border-radius: 8px;
   overflow: hidden;
 }
-
 body.heading-cutout h2::before {
   content: attr(data-text);
   position: absolute;
@@ -223,6 +222,7 @@ body.heading-cutout h2::before {
   pointer-events: none;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 /* === Outline (контур) === */
