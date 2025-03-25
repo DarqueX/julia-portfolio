@@ -115,18 +115,18 @@ h1 {
 h2 {
   display: block;
   width: fit-content;
-  background-color: #111; /* Чёрный фон */
-  color: #fff; /* Белый текст */
+  background: linear-gradient(135deg, #1a1a1a, #333); /* Градиент */
+  color: #fff;
   font-size: 32px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2px;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.2rem;
   margin-bottom: 20px;
   position: relative;
 
-  border-radius: 8px; /* закруглённые края */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* объём */
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
 }
 
 
