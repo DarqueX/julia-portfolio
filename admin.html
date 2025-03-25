@@ -213,9 +213,10 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // Редактирование портфолио
-const storage = firebase.storage();
+
 
 async function addPortfolioCard() {
+  const storage = firebase.storage();
   const category = document.getElementById("portfolioCategory").value;
   const title = document.getElementById("portfolioTitle").value.trim();
   const description = document.getElementById("portfolioDescription").value.trim();
