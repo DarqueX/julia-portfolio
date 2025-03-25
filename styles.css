@@ -112,11 +112,12 @@ h1 {
 
 /* ===  Стилизация заголовков === */
 
+/* === Общий стиль заголовков по умолчанию === */
 h2 {
   display: block;
   width: fit-content;
-  background-color: #111; /* Чёрный фон */
-  color: #fff; /* Белый текст */
+  background-color: #111;
+  color: #fff;
   font-size: 32px;
   font-weight: 600;
   text-transform: uppercase;
@@ -124,17 +125,14 @@ h2 {
   padding: 0.5rem 1rem;
   margin-bottom: 20px;
   position: relative;
-
-  border-radius: 8px; /* закруглённые края */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* объём */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* === Градиент === */
 body.heading-gradient h2 {
   background: linear-gradient(to right, #000, #444, #888, #444, #000);
   color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 /* === Светящийся === */
@@ -145,14 +143,12 @@ body.heading-glow h2 {
   box-shadow: 0 0 15px rgba(255,255,255,0.3);
 }
 
-/* === Анимированный фон === */
+/* === Анимированный фон (градиент) === */
 body.heading-animated h2 {
   background: linear-gradient(270deg, #111, #999, #111);
   background-size: 400% 400%;
   animation: headingSlideBW 8s ease infinite;
   color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 @keyframes headingSlideBW {
@@ -161,8 +157,7 @@ body.heading-animated h2 {
   100% { background-position: 0% 50%; }
 }
 
-
-/* === Стеклянный (blur) стиль === */
+/* === Полупрозрачный стеклянный стиль === */
 body.heading-glass h2 {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
@@ -170,7 +165,7 @@ body.heading-glass h2 {
   border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* === С левой полосой === */
+/* === С левой цветной полосой === */
 body.heading-bordered h2 {
   background-color: transparent;
   color: #111;
@@ -180,7 +175,7 @@ body.heading-bordered h2 {
   box-shadow: none;
 }
 
-/* === Стиль “Glass” (полупрозрачный с размытой дымкой) === */
+/* === Glass Blur (прозрачный дымчатый) === */
 body.heading-glass-blur h2 {
   background: rgba(255, 255, 255, 0.05);
   color: #fff;
@@ -191,7 +186,7 @@ body.heading-glass-blur h2 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* === Стиль “Bordered” (только рамка, без заливки) === */
+/* === Границы (Outline Fixed) === */
 body.heading-outlinefix h2 {
   background: none;
   color: #111;
@@ -201,7 +196,7 @@ body.heading-outlinefix h2 {
   box-shadow: none;
 }
 
-/* === Cutout (вырезанный текст) === */
+/* === Cutout (вырезанный эффект) === */
 body.heading-cutout h2 {
   position: relative;
   color: rgba(255, 255, 255, 0.1);
@@ -226,30 +221,18 @@ body.heading-cutout h2::before {
   pointer-events: none;
 }
 
-
-/* === Outline (текст с рамкой) === */
+/* === Контур (Outline Text) === */
 body.heading-outline h2 {
-  font-size: 32px;
-  font-weight: 600;
-  letter-spacing: 2px;
   color: transparent;
   background-color: #111;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  position: relative;
-  -webkit-text-stroke: 1px white; /* обводка */
+  -webkit-text-stroke: 1px white;
 }
 
-/* === Subtle Shadow (плавная тень) === */
+/* === Shadow (Тень) === */
 body.heading-shadow h2 {
-  font-size: 32px;
-  font-weight: 600;
   color: #f9f9f9;
   background-color: #2c2c2c;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);
-  letter-spacing: 2px;
 }
 
 
