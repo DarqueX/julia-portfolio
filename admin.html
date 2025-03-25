@@ -154,18 +154,33 @@
 }
     
   // Переключение стилей заголовков 
-  function changeHeadingStyle(style) {
-    const body = document.body;
-    const allStyles = ['default', 'gradient', 'glow', 'animated', 'glass', 'bordered'];
+const styleSelector = document.getElementById("heading-style");
 
-    // Удаляем все стили
-    allStyles.forEach(s => body.classList.remove(`heading-${s}`));
+styleSelector.addEventListener("change", function () {
+  const selectedStyle = this.value;
+  localStorage.setItem("headingStyle", selectedStyle);
 
-    // Добавляем выбранный
-    if (style !== 'default') {
-      body.classList.add(`heading-${style}`);
+  // Удаляем старые классы стилей
+  document.body.classList.forEach(cls => {
+    if (cls.startsWith("heading-")) {
+      document.body.classList.remove(cls);
     }
+  });
+
+  // Применяем выбранный стиль сразу на админке
+  if (selectedStyle) {
+    document.body.classList.add("heading-" + selectedStyle);
   }
+});
+
+// При загрузке страницы применяем сохранённый стиль
+window.addEventListener("DOMContentLoaded", () => {
+  const savedStyle = localStorage.getItem("headingStyle");
+  if (savedStyle) {
+    document.body.classList.add("heading-" + savedStyle);
+    styleSelector.value = savedStyle;
+  }
+});
     
   </script>
 
