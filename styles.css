@@ -522,6 +522,7 @@ margin: 3rem auto;
   max-height: 700px;        /* ← Ограничиваем высоту */
   overflow-y: auto;         /* ← Включаем прокрутку */
   scrollbar-width: thin; /* для Firefox */
+   -webkit-overflow-scrolling: touch; /* для IOS */
 }
 
 #latestPosts::-webkit-scrollbar {
