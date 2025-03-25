@@ -505,6 +505,21 @@ body.modal-open .scroll-button {
     font-size: 1.2rem;
     text-align: center;
   }
+  h4 {
+  display: block;
+  width: fit-content;
+  background-color: #111;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 20px;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
 
   /* Уменьшенное фото и обтекание */
   img[alt="Фото Юлии"] {
