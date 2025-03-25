@@ -217,7 +217,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 async function addPortfolioCard() {
-  const storage = firebase.storage();
+  const storage = firebase.app().storage();
   const category = document.getElementById("portfolioCategory").value;
   const title = document.getElementById("portfolioTitle").value.trim();
   const description = document.getElementById("portfolioDescription").value.trim();
