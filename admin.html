@@ -111,6 +111,10 @@
 
    <!-- Ссылка на главную страницу -->
   <a href="index.html" style="display:block; margin-top: 1rem; text-align:center;">← На главную</a>
+  
+<!--Подключение env.js-->
+  <script src=".env.js"></script>
+<script src="admin.js"></script> <!-- или просто <script>...</script> если код в HTML -->
 
 
   <script>
@@ -217,8 +221,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
  async function addPortfolioCard() {
-    const accessKeyId = 'ВАШ_ACCESS_KEY';
-    const secretAccessKey = 'ВАШ_SECRET_KEY';
+const accessKeyId = window.env.ACCESS_KEY;
+const secretAccessKey = window.env.SECRET_KEY;
     const bucketName = 'portfolio-files';
     const region = 'ru-central1'; // регион Яндекс.Облака
     const folder = 'portfolio';
