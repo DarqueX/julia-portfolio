@@ -237,14 +237,15 @@ async function addPortfolioCard() {
 
     const reader = new FileReader();
     reader.onload = async function () {
-      const base64File = reader.result.split(',')[1];
+      const arrayBuffer = reader.result;
 
-      try {
-        const response = await fetch("https://functions.yandexcloud.net/d4e11n5o5vhcu524n0gg?filename=" + encodeURIComponent(file.name), {
-          method: "POST",
-          headers: { "Content-Type": "application/octet-stream" },
-          body: base64File
-        });
+try {
+  const response = await fetch("https://functions.yandexcloud.net/d4e11n5o5vhcu524n0gg?filename=" + encodeURIComponent(file.name), {
+    method: "POST",
+    headers: { "Content-Type": "application/pdf" },
+    body: arrayBuffer
+  });
+
 
         if (!response.ok) throw new Error("Ошибка загрузки файла");
 
@@ -258,7 +259,7 @@ async function addPortfolioCard() {
       }
     };
 
-    reader.readAsDataURL(file);
+    reader.readAsArrayBuffer(file);
   }
 
     
